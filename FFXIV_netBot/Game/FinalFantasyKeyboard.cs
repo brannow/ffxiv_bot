@@ -16,7 +16,7 @@ namespace FFXIV_netBot
         public FinalFantasyKeyboard(GeneralKeys gKeySet)
         {
             this.keys = gKeySet;
-            this.attachProcess("ffxiv");
+            this.attachProcess(FinalFantasyXIVMemory.PROCESSNAME);
         }
 
         public void pressJumpKey()

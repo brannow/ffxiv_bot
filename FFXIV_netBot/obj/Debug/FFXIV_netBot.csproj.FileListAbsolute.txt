@@ -25,3 +25,31 @@ C:\Users\Plany\Desktop\final fantasy data\netBot\app\FFXIV_netBot\FFXIV_netBot\o
 C:\Users\Plany\Desktop\final fantasy data\netBot\app\FFXIV_netBot\FFXIV_netBot\obj\Debug\Tenryuu.application
 C:\Users\Plany\Desktop\final fantasy data\netBot\app\FFXIV_netBot\FFXIV_netBot\obj\Debug\Tenryuu.exe
 C:\Users\Plany\Desktop\final fantasy data\netBot\app\FFXIV_netBot\FFXIV_netBot\obj\Debug\Tenryuu.pdb
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\bin\Debug\Tenryuu.exe.config
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\bin\Debug\Tenryuu.exe.manifest
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\bin\Debug\Tenryuu.application
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\bin\Debug\Tenryuu.exe
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\bin\Debug\Tenryuu.pdb
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.csprojResolveAssemblyReference.cache
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.g.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Controls.ImageButton.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.ConfigCombatForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.ConfigFishingForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.ConfigGatheringForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.ConfigSelectFrom.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.EntityForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.FFXIV_netBot.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.OpenWaypointForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.SaveConfigForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.SaveWaypointForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.SettingForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Forms.WaypointEditForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.Properties.Resources.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.WaypointForm.resources
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.csproj.GenerateResource.Cache
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\FFXIV_netBot.csproj.CoreCompileInputs.cache
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.TrustInfo.xml
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.exe.manifest
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.application
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.exe
+C:\Users\Benjamin\Desktop\bot\FFXIV_netBot\obj\Debug\Tenryuu.pdb

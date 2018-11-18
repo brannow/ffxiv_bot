@@ -8,7 +8,7 @@ namespace FFXIV_netBot.Module
 {
     public class EntityItem
     {
-        public uint baseAddress;
+        public IntPtr baseAddress;
         public String name;
         public PlayerPosition position;
         public Int32 visibleStatus;
@@ -17,7 +17,7 @@ namespace FFXIV_netBot.Module
         public Int32 interacrtionId;
         public Single distance = -1;
 
-        public EntityItem(uint baseAddress, FinalFantasyXIVMemory mem)
+        public EntityItem(IntPtr baseAddress, FinalFantasyXIVMemory mem)
         {
             this.baseAddress = baseAddress;
             this.updateData(mem);

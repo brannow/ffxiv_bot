@@ -284,6 +284,9 @@ namespace FFXIV_netBot
                 UInt32 playerMP = (UInt32)this.memory.playerMP();
                 UInt32 playerMPMax = (UInt32)this.memory.playerMaxMP();
 
+                UInt32 playerGP = (UInt32)this.memory.playerGP();
+                UInt32 playerGPMax = (UInt32)this.memory.playerMaxGP();
+
                 UInt32 playerTP = (UInt32)this.memory.playerTP();
                 UInt32 playerTPMax = (UInt32)this.memory.playerMaxTP();
 
@@ -294,8 +297,18 @@ namespace FFXIV_netBot
                 this.hpBar.Maximum = (int)playerHPMax;
                 this.hpBar.Value = (int)playerHP;
 
-                this.mpBar.Maximum = (int)playerMPMax;
-                this.mpBar.Value = (int)playerMP;
+                if (playerMPMax == 0)
+                {
+                    this.label3.Text = "GP:";
+                    this.mpBar.Maximum = (int)playerGPMax;
+                    this.mpBar.Value = (int)playerGP;
+                }
+                else
+                {
+                    this.label3.Text = "MP:";
+                    this.mpBar.Maximum = (int)playerMPMax;
+                    this.mpBar.Value = (int)playerMP;
+                }
 
                 this.tpBar.Maximum = (int)playerTPMax;
                 this.tpBar.Value = (int)playerTP;
@@ -429,6 +442,11 @@ namespace FFXIV_netBot
                     }
                 }
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

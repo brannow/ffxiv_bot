@@ -53,6 +53,8 @@ namespace FFXIV_netBot
 
     public class FinalFantasyXIVMemory : CoreMemory
     {
+        public const string PROCESSNAME = "ffxiv_dx11";
+
         public FinalFantasyXIVMemory() 
         {
             this.initConnection();
@@ -60,220 +62,214 @@ namespace FFXIV_netBot
 
         public void initConnection()
         {
-            this.attachProcess("ffxiv");
+            this.attachProcess(FinalFantasyXIVMemory.PROCESSNAME);
         }
 
         public Int32 playerID()
         {
-            uint ptr1 = this.readPointer(this.processAddress(), FFXIVMemoryOffset.PlayerInfo.baseAddress);
-            return this.readIntValue(ptr1, FFXIVMemoryOffset.PlayerInfo.ID);
+            IntPtr ptr1 = this.readPointer(this.processAddress(), FFXIVMemoryOffset.PlayerInfo.baseAddress);
+            return this.readIntValue((IntPtr)ptr1, FFXIVMemoryOffset.PlayerInfo.ID);
         }
 
         public String playerName()
         {
-            uint ptr1 = this.readPointer(this.processAddress(), FFXIVMemoryOffset.PlayerInfo.baseAddress);
-            return this.readStringValue(64, ptr1, FFXIVMemoryOffset.PlayerInfo.name);
+            IntPtr ptr1 = this.readPointer(this.processAddress(), FFXIVMemoryOffset.PlayerInfo.baseAddress);
+            return this.readStringValue(64, (IntPtr)ptr1, FFXIVMemoryOffset.PlayerInfo.name);
         }
 
         public Boolean fishingAvailable()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.FishingAddress.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.FishingAddress.offset);
-            return this.readBoolValue(ptr1, FFXIVMemoryOffset.FishingAddress.available);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.FishingAddress.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.FishingAddress.offset);
+            return this.readBoolValue((IntPtr)ptr1, FFXIVMemoryOffset.FishingAddress.available);
         }
 
         public Int32 fishingStatus()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.FishingAddress.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.FishingAddress.offset);
-            return this.readIntValue(ptr1, FFXIVMemoryOffset.FishingAddress.status);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.FishingAddress.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.FishingAddress.offset);
+            return this.readInt2Value((IntPtr)ptr1, FFXIVMemoryOffset.FishingAddress.status);
         }
 
         public Int32 playerHP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.HP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.HP.current);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.HP.offset1);
+            return this.readIntValue((IntPtr)ptr4, FFXIVMemoryOffset.HP.current);
         }
 
         public Int32 playerMaxHP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.HP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.HP.max);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.HP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.HP.max);
         }
 
         public Int32 playerMP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.MP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.MP.current);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.MP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.MP.current);
         }
 
         public Int32 playerMaxMP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.MP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.MP.max);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.MP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.MP.max);
         }
 
         public Int32 playerTP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.TP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.TP.current);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.TP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.TP.current);
         }
 
         public Int32 playerMaxTP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.TP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.TP.max);
+            return 1000;
         }
 
         public Int32 playerCP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.CP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.CP.current);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.CP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.CP.current);
         }
 
         public Int32 playerMaxCP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.CP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.CP.max);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.CP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.CP.max);
         }
 
         public Int32 playerGP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.GP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.GP.current);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.GP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.GP.current);
         }
 
         public Int32 playerMaxGP()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
-            uint ptr1 = this.readPointer(baseAddress, FFXIVMemoryOffset.Player.offset1);
-            uint ptr2 = this.readPointer(ptr1, FFXIVMemoryOffset.Player.offset2);
-            uint ptr3 = this.readPointer(ptr2, FFXIVMemoryOffset.Player.offset3);
-            uint ptr4 = this.readPointer(ptr3, FFXIVMemoryOffset.GP.offset1);
-            return this.readIntValue(ptr4, FFXIVMemoryOffset.GP.max);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Player.baseAddress);
+            IntPtr ptr1 = this.readPointer((IntPtr)baseAddress, FFXIVMemoryOffset.Player.offset1);
+            IntPtr ptr2 = this.readPointer((IntPtr)ptr1, FFXIVMemoryOffset.Player.offset2);
+            IntPtr ptr3 = this.readPointer((IntPtr)ptr2, FFXIVMemoryOffset.Player.offset3);
+            IntPtr ptr4 = this.readPointer((IntPtr)ptr3, FFXIVMemoryOffset.GP.offset1);
+            return this.readInt2Value((IntPtr)ptr4, FFXIVMemoryOffset.GP.max);
         }
 
         public PlayerPosition position()
         {
             PlayerPosition pos = new PlayerPosition();
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            pos.r = this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.rotation);
-            pos.x = this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.x);
-            pos.y = this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.y);
-            pos.z = this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.z);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            pos.r = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.rotation);
+            pos.x = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.x);
+            pos.y = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.y);
+            pos.z = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.z);
             return pos;
         }
 
         public Single rotation()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            return this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.rotation);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            return this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.rotation);
         }
 
         public void setRotation(Single rotation)
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            this.writeFloatValue(rotation, baseAddress, FFXIVMemoryOffset.Position.rotation);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            this.writeFloatValue(rotation, (IntPtr)baseAddress, FFXIVMemoryOffset.Position.rotation);
         }
 
         public Single positionX()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            return this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.x);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            return this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.x);
         }
 
         public Single positionY()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            return this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.y);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            return this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.y);
         }
 
         public Single positionZ()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
-            return this.readFloatValue(baseAddress, FFXIVMemoryOffset.Position.z);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.Position.baseAddress);
+            return this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.Position.z);
         }
 
         public Int32 entityCount()
         {
-            Int32 count = this.readIntValue(this.processAddress(), FFXIVMemoryOffset.EntityList.baseAddress);
+            Int32 count = this.readInt2Value(this.processAddress(), FFXIVMemoryOffset.EntityList.baseAddress);
             return count;
         }
 
-        public uint entityPointerAtIndex(uint index)
+        public IntPtr entityPointerAtIndex(int index)
         {
-            uint offset = FFXIVMemoryOffset.EntityList.listStart + (FFXIVMemoryOffset.EntityList.listOffset * index);
-            uint pointer = this.readPointer(this.processAddress(), offset);
-            return pointer;
+            int offset = FFXIVMemoryOffset.BaseAddresses.entityListAddress + (FFXIVMemoryOffset.EntityList.listOffset * (index + 1));
+            return this.readPointer(this.processAddress(), offset);
         }
 
-        public String entityName(uint baseAddress)
+        public String entityName(IntPtr baseAddress)
         {
             return this.readStringValue(64, baseAddress, FFXIVMemoryOffset.EntityItem.name);
         }
 
-        public PlayerPosition entityposition(uint baseAddress)
+        public PlayerPosition entityposition(IntPtr baseAddress)
         {
             PlayerPosition pos = new PlayerPosition();
-            pos.r = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.rotation);
-            pos.x = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.x);
-            pos.y = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.y);
-            pos.z = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.z);
+            pos.r = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.EntityItem.rotation);
+            pos.x = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.EntityItem.x);
+            pos.y = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.EntityItem.y);
+            pos.z = this.readFloatValue((IntPtr)baseAddress, FFXIVMemoryOffset.EntityItem.z);
             return pos;
         }
 
-        public Int32 entityVisibleStatus(uint baseAddress)
+        public Int32 entityVisibleStatus(IntPtr baseAddress)
         {
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.hidden);
         }
 
-        public Int32 entityTypeId(uint baseAddress)
+        public Int32 entityTypeId(IntPtr baseAddress)
         {
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.typeId);
         }
 
-        public Int32 entityUniqueId(uint baseAddress)
+        public Int32 entityUniqueId(IntPtr baseAddress)
         {
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.uniqueId);
         }
 
-        public Int32 entityInteractionId(uint baseAddress)
+        public Int32 entityInteractionId(IntPtr baseAddress)
         {
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.interacrtionId);
         }
@@ -281,13 +277,13 @@ namespace FFXIV_netBot
 
         public String targetName()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             return this.readStringValue(64, baseAddress, FFXIVMemoryOffset.EntityItem.name);
         }
 
         public PlayerPosition targetposition()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             PlayerPosition pos = new PlayerPosition();
             pos.r = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.rotation);
             pos.x = this.readFloatValue(baseAddress, FFXIVMemoryOffset.EntityItem.x);
@@ -298,25 +294,25 @@ namespace FFXIV_netBot
 
         public Int32 targetVisibleStatus()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.hidden);
         }
 
         public Int32 targetTypeId()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.typeId);
         }
 
         public Int32 targetUniqueId()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.uniqueId);
         }
 
         public Int32 targetInteractionId()
         {
-            uint baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
+            IntPtr baseAddress = this.readPointer(this.processAddress(), FFXIVMemoryOffset.BaseAddresses.targetAddress);
             return this.readIntValue(baseAddress, FFXIVMemoryOffset.EntityItem.interacrtionId);
         }
     }

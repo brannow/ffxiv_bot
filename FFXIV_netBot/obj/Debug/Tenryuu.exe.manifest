@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tenryuu.exe" size="850944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tenryuu.exe" size="849408">
       <assemblyIdentity name="Tenryuu" version="0.3.2.3" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gNRREAeQ1ajVeLnJ/czDaYMSO+QvDLeGrfdm7dQn1JE=</dsig:DigestValue>
+        <dsig:DigestValue>hg7e/sWALSUUMreb3u0so332uRa+xlwcIvqOR0btkmQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

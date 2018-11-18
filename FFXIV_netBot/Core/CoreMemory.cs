@@ -21,7 +21,7 @@ namespace FFXIV_netBot
         [DllImport("kernel32.dll")]
         static extern IntPtr OpenProcess(UInt32 dwDesiredAccess, Boolean bInheritHandle, UInt32 dwProcessId);
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool WriteProcessMemory(IntPtr hProcess, int lpBaseAddress, byte[] lpBuffer, int nSize, int lpNumberOfBytesWritten);
+        static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, UIntPtr nSize, int lpNumberOfBytesWritten);
 
         public enum ProcessAccessType : uint
         {
@@ -93,11 +93,11 @@ namespace FFXIV_netBot
             return ((uint)this.processHandle > 0);
         }
 
-        public uint processAddress()
+        public IntPtr processAddress()
         {
             if (this.currentProcess != null && !this.currentProcess.HasExited)
             {
-                return (uint)this.currentProcess.MainModule.BaseAddress;
+                return this.currentProcess.MainModule.BaseAddress;
             } 
             else
             {
@@ -105,10 +105,11 @@ namespace FFXIV_netBot
                 this.processHandle = (IntPtr)0;
                 this.currentProcess = null;
             }
-            return 0;
+
+            return (IntPtr)0;
         }
 
-        private Byte[] readRawMemory(uint byteSize, uint address, uint offset = 0) 
+        private Byte[] readRawMemory(uint byteSize, IntPtr address, int offset = 0) 
         {
             if (this.currentProcess == null || this.currentProcess.HasExited)
             {
@@ -130,15 +131,15 @@ namespace FFXIV_netBot
             if (canReadMemory)
             {
                 uint rw = 0;
-
+                
                 address += offset;
-                ReadProcessMemory(this.processHandle, (IntPtr)address, bytes, (UIntPtr)byteSize, ref rw);
+                ReadProcessMemory(this.processHandle, address, bytes, (UIntPtr)byteSize, ref rw);
                 return bytes;
             }
             return bytes;
         }
 
-        private void writeRawMemory(Byte[] bytes, uint address, uint offset = 0)
+        private void writeRawMemory(Byte[] bytes, IntPtr address, int offset = 0)
         {
             if (this.currentProcess == null || this.currentProcess.HasExited)
             {
@@ -156,29 +157,40 @@ namespace FFXIV_netBot
             if (canReadMemory)
             {
                 address += offset;
-                WriteProcessMemory(this.processHandle, (int)address, bytes, bytes.Length, 0);
+                WriteProcessMemory(this.processHandle, address, bytes, (UIntPtr)bytes.Length, 0);
                 //System.Diagnostics.Debug.WriteLine("NOTICE: MEMORYWRITE addr:{0:X}", address);
             }
         }
 
-        protected UInt32 readPointer(uint address, uint offset = 0)
+        protected IntPtr readPointer(IntPtr address, int offset = 0)
         {
             byte[] bytes = this.readRawMemory(24, address, offset);
-            return BitConverter.ToUInt32(bytes, 0);
+            return (IntPtr)BitConverter.ToInt64(bytes, 0);
         }
 
-        protected Int32 read4ByteValue(uint address, uint offset = 0)
+        protected Int32 read4ByteValue(IntPtr address, int offset = 0)
         {
-            byte[] bytes = this.readRawMemory(sizeof(Int32), address, offset);
+            byte[] bytes = this.readRawMemory(4, address, offset);
             return BitConverter.ToInt32(bytes, 0);
         }
 
-        protected Int32 readIntValue(uint address, uint offset = 0)
+        protected Int32 read2ByteValue(IntPtr address, int offset = 0)
+        {
+            byte[] bytes = this.readRawMemory(2, address, offset);
+            return BitConverter.ToInt16(bytes, 0);
+        }
+
+        protected Int32 readInt2Value(IntPtr address, int offset = 0)
+        {
+            return this.read2ByteValue(address, offset);
+        }
+
+        protected Int32 readIntValue(IntPtr address, int offset = 0)
         {
             return this.read4ByteValue(address, offset);
         }
 
-        protected Single readFloatValue(uint address, uint offset = 0)
+        protected Single readFloatValue(IntPtr address, int offset = 0)
         {
             byte[] bytes = this.readRawMemory(sizeof(Single), address, offset);
             Single res = BitConverter.ToSingle(bytes, 0);
@@ -187,13 +199,13 @@ namespace FFXIV_netBot
             return res;
         }
 
-        protected Double readDoubleValue(uint address, uint offset = 0)
+        protected Double readDoubleValue(IntPtr address, int offset = 0)
         {
             byte[] bytes = this.readRawMemory(sizeof(Double), address, offset);
             return BitConverter.ToSingle(bytes, 0);
         }
 
-        protected String readStringValue(uint stringLength, uint address, uint offset = 0)
+        protected String readStringValue(uint stringLength, IntPtr address, int offset = 0)
         {
             byte[] bytes = this.readRawMemory(stringLength, address, offset);
 
@@ -207,13 +219,13 @@ namespace FFXIV_netBot
             return System.Text.Encoding.UTF8.GetString(finalByte);
         }
 
-        protected Boolean readBoolValue(uint address, uint offset = 0)
+        protected Boolean readBoolValue(IntPtr address, int offset = 0)
         {
             byte[] bytes = this.readRawMemory(sizeof(Boolean), address, offset);
             return BitConverter.ToBoolean(bytes, 0);
         }
 
-        protected void writeFloatValue(Single value, uint address, uint offset = 0)
+        protected void writeFloatValue(Single value, IntPtr address, int offset = 0)
         {
             Byte[] valueByte = BitConverter.GetBytes(value);
             this.writeRawMemory(valueByte, address, offset);

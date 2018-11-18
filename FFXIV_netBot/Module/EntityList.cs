@@ -30,10 +30,9 @@ namespace FFXIV_netBot.Module
         {
             Int32 _count = this.memory.entityCount();
             this.list.Clear();
-            for(uint i = 0; i < _count; ++i)
+            for(int i = 0; i < _count; ++i)
             {
-                uint ptr = this.memory.entityPointerAtIndex(i);
-
+                IntPtr ptr = this.memory.entityPointerAtIndex(i);
                 EntityItem currItem = this.list.FirstOrDefault(item => item.baseAddress == ptr);
                 if (currItem == null)
                 {

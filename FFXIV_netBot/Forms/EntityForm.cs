@@ -19,6 +19,8 @@ namespace FFXIV_netBot.Forms
 
         private Controls.ImageButton closeButton;
 
+        private bool isClosed = false;
+
         public EntityForm(FinalFantasyXIVMemory memory)
         {
             this.memory = memory;
@@ -67,7 +69,9 @@ namespace FFXIV_netBot.Forms
 
         private void EntityForm_Deactivated(object sender, System.EventArgs e)
         {
-            this.Opacity = 0.5;
+            if (!isClosed) {
+                this.Opacity = 0.5;
+            }
         }
 
         protected override void WndProc(ref Message m)
@@ -86,11 +90,13 @@ namespace FFXIV_netBot.Forms
 
         private void exitPressed(object sender, EventArgs e)
         {
+            isClosed = true;
             this.Close();
         }
 
         private void EntityForm_Load(object sender, EventArgs e)
         {
+            isClosed = false;
             this.list = new EntityList(this.memory);
         }
 
@@ -172,7 +178,9 @@ namespace FFXIV_netBot.Forms
                 }
             }
             if (this.checkBox1.Checked)
+            {
                 this.listUpdateTimer.Start();
+            }
         }
     }
 }

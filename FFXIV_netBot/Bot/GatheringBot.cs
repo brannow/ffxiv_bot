@@ -107,6 +107,19 @@ namespace FFXIV_netBot.Bot
             return new Waypoint();
         }
 
+        private bool matchedInteractionItem(int interactionId)
+        {
+            if (this.gatheringConfig.matureTree == 1 && interactionId == (int)GatheringId.MatureTree)
+                return true;
+            if (this.gatheringConfig.lushVegetationPatch == 1 && interactionId == (int)GatheringId.LushVegetationPatch)
+                return true;
+            if (this.gatheringConfig.mineralDeposit == 1 && interactionId == (int)GatheringId.MineralDeposit)
+                return true;
+            if (this.gatheringConfig.rockyOutcrop == 1 && interactionId == (int)GatheringId.RockyOutcrop)
+                return true;
+            return false;
+        }
+
 
         private bool matchedInteractionItem(EntityItem item)
         {
@@ -157,14 +170,15 @@ namespace FFXIV_netBot.Bot
 
             if (this.memory.targetUniqueId() != this.targetItem.uniqueId)
             {
-                if(this._itemFound || this._strike > 3)
+                if(this._itemFound || !matchedInteractionItem(this.memory.targetInteractionId()) || this.memory.targetVisibleStatus() != 0)
                 {
+                    this.keyboard.pressESCKey();
                     this.ignoredIndex = this.currentIndex;
                     this.movement.resume();
                     return;
                 }
 
-                this.keyboard.pressESCKey();
+                //this.keyboard.pressESCKey();
                 Thread.Sleep(1000);
                 this.keyboard.pressActionKey();
                 Thread.Sleep(1000);
